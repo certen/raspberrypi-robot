@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkyNet Control || Home page</title>
+
+    <link rel="stylesheet" href="../static/css/foundation.css" />
+    <script src="../static/js/vendor/modernizr.js"></script>
+
+    <script src='../static/js/joystick.js'></script>
+    <script src='../static/js/robot.js'></script>
+</head>
+<body>
+
+<div class="row">
+
+    <div class="large-12 columns">
+        <h1>Skynet</h1>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="large-8 medium-8 columns">
+        <h5>View</h5>
+        <div class="row" >
+            <div class="large-12 columns">
+                <div class="panel">
+                    <img id="camera" src="" WIDTH=640 HEIGHT=480/>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div class="large-4 medium-4 columns"  >
+        <div class="panel callout radius" id="joystick"  >
+            <h5>Joystick</h5>
+<p id="joystickp"></p>
+
+        </div>
+        <h5>Controls:</h5>
+        <p><a href="#" class="medium success button">Start Camera</a><br/>
+            <a href="#" class="medium alert button">Stop Camera</a><br/>
+
+            <a href="#" class="small alert button">Shutdown System</a><br/>
+
+
+
+        <div class="panel"  >
+            <h5>Server Response</h5>
+        <div class="large-4 medium-4 columns" id="serverFeedback">
+            </div>
+          </div>
+    </div>
+
+</div>
+
+</body>
+<script src="../static/js/vendor/jquery.js"></script>
+<script src="../static/js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+
+    $(document).ready( function() {
+        initisaliseCamera();
+
+        var feedback = document.getElementById('joystickp');
+        var rbt = new robot({
+            feedback:feedback
+        });
+        rbt.init();
+    });
+
+
+    function initisaliseCamera() {
+        var cameraURL = "http://" + window.location.hostname + ":8080/?action=stream";
+        document.querySelector("#camera").setAttribute("src", cameraURL);
+    }
+</script>
+</html>
